@@ -13,6 +13,8 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        int boardWith ;
+        int boardHeight;
         Canvas canvas;
         StackPane root;
         Scene scene;
@@ -20,17 +22,23 @@ public class Main extends Application {
         System.out.println("Select the gamemode (Easy/ Medium/ Hard)");
         String gamemode = input.nextLine();
         if (gamemode.equalsIgnoreCase("Easy")) {
+            boardWith = 200;
+            boardHeight = 200;
             canvas = new Canvas(200, 200);
             root = new StackPane(canvas);
             scene = new Scene(root, 200, 200);
 
         }
         else if (gamemode.equalsIgnoreCase("Medium")) {
+            boardWith = 400;
+            boardHeight = 400;
             canvas = new Canvas(400, 400);
             root = new StackPane(canvas);
             scene = new Scene(root, 400, 400);
         }
         else{
+            boardWith = 600;
+            boardHeight = 600;
             canvas = new Canvas(600, 600);
             root = new StackPane(canvas);
             scene = new Scene(root, 600, 600);
@@ -44,27 +52,25 @@ public class Main extends Application {
         int tileSize = 50; // each block is 20x20 pixels
 
 // Black background
-        gc.setFill(Color.GREEN);
-        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-// Draw the grid lines
-        gc.setStroke(Color.BLACK);
-        gc.setLineWidth(0.5);
-
-// Vertical lines
-        for (int x = 0; x <= canvas.getWidth(); x += tileSize) {
-            gc.strokeLine(x, 0, x, canvas.getHeight());
-        }
-
-// Horizontal lines
-        for (int y = 0; y <= canvas.getHeight(); y += tileSize) {
-            gc.strokeLine(0, y, canvas.getWidth(), y);
+        for (int x = 0; x < canvas.getWidth()/ tileSize; x++) {
+            for (int y = 0; y < canvas.getHeight() / tileSize; y++) {
+                if ((x + y) % 2 == 0) {
+                    gc.setFill(Color.web("#AAD751"));
+                    ;
+                } else {
+                    gc.setFill(Color.web("#A2D149"));
+                }
+                gc.fillRect(x * tileSize, y * tileSize,  tileSize, tileSize);
+            }
         }
 
 // White border around the whole board
         gc.setStroke(Color.WHITE);
         gc.setLineWidth(2);
         gc.strokeRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        Apple apple = new Apple (boardWith, boardHeight);
+        apple.draw(gc);
 
     }
 }
