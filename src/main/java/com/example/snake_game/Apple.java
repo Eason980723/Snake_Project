@@ -14,8 +14,14 @@ public class Apple {
         x = (int) (Math.random() * (boardWidth/SIZE)) * SIZE;
         y = (int) (Math.random() * (boardHeight/SIZE)) * SIZE;
     }
+    public int getX() {
+        return x /SIZE;
+    }
+    public int getY() {
+        return y / SIZE;
+    }
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.RED);
+        gc.setFill(Color.web("#FF6B6B"));
         gc.fillOval(x, y, SIZE, SIZE);
     }
 }

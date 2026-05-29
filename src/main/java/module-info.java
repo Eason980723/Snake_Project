@@ -10,6 +10,7 @@ module com.example.snake_game {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens com.example.snake_game to javafx.fxml;
     exports com.example.snake_game;
